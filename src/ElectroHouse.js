@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
-import Login from './login';
+import Login from './Component/Login';
 import './App.css';
+import { BrowserRouter,Route, NavLink, Switch} from "react-router-dom";
 
 function ElectroHouse() {
   return (
@@ -10,17 +10,17 @@ function ElectroHouse() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Sistema de Gestión de Inventario
+          Sistema de Gestión de Inventario          
         </p>
 
-        <Router>
-          <div>
-            <Link className="App-link" to="/login">Ingrese aquí</Link>            
-            <Route path="/login" component={Login} />
-          </div>
-        </Router>
-        
-      </header>
+        <BrowserRouter>
+          <Switch>
+            <Route path="/" component={Login} exact/>          
+            <Route path="/login" component={Login}/>          
+          </Switch>
+        </BrowserRouter>
+
+      </header>      
     </div>
   );
 }

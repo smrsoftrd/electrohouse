@@ -1,18 +1,16 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
-import logo from './logo.svg';
+import {BrowserRouter, Router, Switch, Redirect} from "react-router-dom";
 
 import Form from 'react-jsonschema-form';
 
 const schema = {
-    title: "Login",
+    title: "Ingrese aquí",
     type: "object",
     required: ["user","pwd"],
     properties: {
       user: {type: "string"},
-      pwd: {type: "string"},
-      done: {type: "boolean", title: "Done?", default: false}
+      pwd: {type: "string"}
     }
 };
 
@@ -30,6 +28,8 @@ const uiSchema = {
   }
 
 const log = (type) => console.log.bind(console, type);
+
+
 /*
 function Login(){
     
@@ -50,10 +50,28 @@ function Login(){
 
 // Remove the `uiSchema` prop to see the difference
 export class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    /*
+    state = {
+      toDashborad: false
+    }*/
+
+    handleSubmit({formData}) {
+        console.log(formData);
+        //toDashboard: true;
+    }
+
     render() {
+
+      /*if (this.state.toDashborad === true) {
+        <Redirect to='/Dashboard'/>
+      }*/
       return (
         <div>
-          <Form schema={schema} uiSchema={uiSchema} />
+          <Form schema={schema} uiSchema={uiSchema} onSubmit={this.handleSubmit}/>
         </div>
       )
     }
